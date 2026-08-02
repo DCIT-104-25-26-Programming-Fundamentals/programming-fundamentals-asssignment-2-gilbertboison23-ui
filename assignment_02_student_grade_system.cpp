@@ -38,6 +38,8 @@
 //   (null character) and let main() print the error message.
 // - Use if / else if / else to determine the grade.
 //
+
+
 #include <iostream>
 using namespace std;
 
@@ -75,10 +77,4 @@ int main() {
 
     return 0;
 }
-// =============================================================================
-// YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
-
-#include <iostream>
-using namespace std;
 
