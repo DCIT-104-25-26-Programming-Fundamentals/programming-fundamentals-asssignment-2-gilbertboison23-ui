@@ -48,68 +48,63 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
-#include <iostream>
-using namespace std;
+
 #include <iostream>
 using namespace std;
 
-// Function to print the first N Fibonacci numbers
 void printFibonacci(int n) {
-    if (n <= 0) {
-        cout << "Error: N must be a positive integer." << endl;
-        return;
+    int a = 0, b = 1;
+    for (int i = 0; i < n; i++) {
+        cout << a;
+        if (i != n - 1) {
+            cout << " ";
+        }
+        int next = a + b;
+        a = b;
+        b = next;
     }
-
-    int first = 0, second = 1, next;
-
-    cout << "Fibonacci sequence: ";
-
-    for (int i = 1; i <= n; i++) {
-        cout << first << " ";
-
-        next = first + second;
-        first = second;
-        second = next;
-    }
-
     cout << endl;
 }
 
-// Function to check if a number is a Fibonacci number
-void checkFibonacci(int num) {
-    if (num < 0) {
-        cout << num << " is NOT a Fibonacci number." << endl;
-        return;
+bool isFibonacci(int number) {
+    if (number < 0) {
+        return false;
     }
-
-    int first = 0, second = 1, next;
-
-    while (first < num) {
-        next = first + second;
-        first = second;
-        second = next;
+    int a = 0, b = 1;
+    while (a <= number) {
+        if (a == number) {
+            return true;
+        }
+        int next = a + b;
+        a = b;
+        b = next;
     }
-
-    if (first == num)
-        cout << num << " is a Fibonacci number." << endl;
-    else
-        cout << num << " is NOT a Fibonacci number." << endl;
+    return false;
 }
 
 int main() {
-    int n, number;
-
-    // Part A
+    // --- Part A: Print first N terms ---
+    int n;
     cout << "How many terms? ";
     cin >> n;
 
-    printFibonacci(n);
+    if (n <= 0) {
+        cout << "Error: N must be a positive integer." << endl;
+    } else {
+        cout << "Fibonacci sequence: ";
+        printFibonacci(n);
+    }
 
-    // Part B
-    cout << "\nEnter a number to check: ";
+    // --- Part B: Check membership ---
+    int number;
+    cout << "Enter a number to check: ";
     cin >> number;
 
-    checkFibonacci(number);
+    if (isFibonacci(number)) {
+        cout << number << " is a Fibonacci number." << endl;
+    } else {
+        cout << number << " is NOT a Fibonacci number." << endl;
+    }
 
     return 0;
 }
