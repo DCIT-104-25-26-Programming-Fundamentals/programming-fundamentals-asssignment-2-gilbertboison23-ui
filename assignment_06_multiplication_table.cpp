@@ -54,58 +54,45 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
-#include <iostream>
-using namespace std;
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
-// Function for Part A: Print a single multiplication table
-void singleTable(int num) {
-    cout << "\nMultiplication Table for " << num << ":\n";
-
+void printTable(int number) {
+    cout << "Multiplication Table for " << number << ":" << endl;
     for (int i = 1; i <= 12; i++) {
-        cout << num << " x " << i << " = " << num * i << endl;
+        cout << number << "  x  " << left << setw(2) << i << " =  " << (number * i) << endl;
     }
 }
 
-// Function for Part B: Print tables from 1 to N
-void multipleTables(int n) {
-    for (int i = 1; i <= n; i++) {
-        cout << "\nMultiplication Table for " << i << ":\n";
-
-        for (int j = 1; j <= 12; j++) {
-            cout << i << " x " << j << " = " << i * j << endl;
+void printTablesUpToN(int n) {
+    for (int number = 1; number <= n; number++) {
+        printTable(number);
+        if (number != n) {
+            cout << string(29, '-') << endl;
         }
-
-        cout << "---------------------------" << endl;
     }
 }
 
 int main() {
-    int number, n;
-
-    // Part A
+    // --- Part A: Single table ---
+    int number;
     cout << "Enter a number: ";
     cin >> number;
+    printTable(number);
 
-    if (number <= 0) {
-        cout << "Error: Number must be a positive integer." << endl;
-        return 0;
-    }
-
-    singleTable(number);
-
-    // Part B
-    cout << "\nEnter a number N: ";
+    // --- Part B: Tables from 1 to N ---
+    cout << endl;
+    int n;
+    cout << "Enter N (for tables 1 to N): ";
     cin >> n;
 
     if (n <= 0) {
         cout << "Error: N must be a positive integer." << endl;
-        return 0;
+    } else {
+        printTablesUpToN(n);
     }
 
-    multipleTables(n);
-
     return 0;
-}
+} 
