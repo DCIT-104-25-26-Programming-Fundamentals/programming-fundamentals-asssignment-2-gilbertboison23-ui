@@ -142,62 +142,108 @@ using namespace std;
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
-def add(a, b):
-    return a + b
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
 
+double add(double a, double b) {
+    return a + b;
+}
 
-def subtract(a, b):
-    return a - b
+double subtract(double a, double b) {
+    return a - b;
+}
 
+double multiply(double a, double b) {
+    return a * b;
+}
 
-def multiply(a, b):
-    return a * b
-
-
-def divide(a, b):
-    if b == 0:
-        return None
-    return round(a / b, 2)
-
-
-def modulus(a, b):
-    if b == 0:
-        return None
-    return a % b
-
-
-def exponentiate(a, b):
-    return a ** b
-
-
-def get_two_numbers():
-    a = float(input("Enter first number : "))
-    b = float(input("Enter second number: "))
-    return a, b
-
-
-def print_menu():
-    print("============================")
-    print("     SIMPLE CALCULATOR")
-    print("============================")
-    print("1. Addition")
-    print("2. Subtraction")
-    print("3. Multiplication")
-    print("4. Division")
-    print("5. Modulus")
-    print("6. Exponentiation")
-    print("7. Quit")
-
-
-if __name__ == "__main__":
-    operations = {
-        "1": ("+", add),
-        "2": ("-", subtract),
-        "3": ("*", multiply),
-        "4": ("/", divide),
-        "5": ("%", modulus),
-        "6": ("**", exponentiate),
+bool divide(double a, double b, double& result) {
+    if (b == 0) {
+        return false;
     }
+    result = a / b;
+    return true;
+}
+
+bool modulus(double a, double b, double& result) {
+    if (b == 0) {
+        return false;
+    }
+    result = fmod(a, b);
+    return true;
+}
+
+double exponentiate(double a, double b) {
+    return pow(a, b);
+}
+
+void getTwoNumbers(double& a, double& b) {
+    cout << "Enter first number : ";
+    cin >> a;
+    cout << "Enter second number: ";
+    cin >> b;
+}
+
+void printMenu() {
+    cout << "============================" << endl;
+    cout << "     SIMPLE CALCULATOR" << endl;
+    cout << "============================" << endl;
+    cout << "1. Addition" << endl;
+    cout << "2. Subtraction" << endl;
+    cout << "3. Multiplication" << endl;
+    cout << "4. Division" << endl;
+    cout << "5. Modulus" << endl;
+    cout << "6. Exponentiation" << endl;
+    cout << "7. Quit" << endl;
+}
+
+int main() {
+    bool running = true;
+
+    while (running) {
+        printMenu();
+        cout << "Select an operation (1-7): ";
+        int choice;
+        cin >> choice;
+
+        if (choice == 7) {
+            cout << "Goodbye!" << endl;
+            running = false;
+        } else if (choice >= 1 && choice <= 6) {
+            double a, b;
+            getTwoNumbers(a, b);
+
+            double result = 0;
+            bool success = true;
+            char symbol = ' ';
+            string symbolStr = "";
+
+            switch (choice) {
+                case 1: result = add(a, b); symbolStr = "+"; break;
+                case 2: result = subtract(a, b); symbolStr = "-"; break;
+                case 3: result = multiply(a, b); symbolStr = "*"; break;
+                case 4: success = divide(a, b, result); symbolStr = "/"; break;
+                case 5: success = modulus(a, b, result); symbolStr = "%"; break;
+                case 6: result = exponentiate(a, b); symbolStr = "^"; break;
+            }
+
+            if (!success) {
+                cout << "Error: Cannot divide by zero." << endl;
+            } else {
+                cout << fixed << setprecision(2);
+                cout << "Result: " << a << " " << symbolStr << " " << b << " = " << result << endl;
+            }
+        } else {
+            cout << "Error: Invalid choice. Please enter a number from 1 to 7." << endl;
+        }
+
+        cout << endl;
+    }
+
+    return 0;
+}
 
     while True:
         print_menu()
